@@ -1,4 +1,5 @@
-##
+## Antes de empezar
+
 
 Todos los datos de la práctica pueden ser descargados del siguiente [link](https://drive.google.com/drive/folders/1hzKPipsvvtnzqzkHqaQQ9VLM45J4P6X7?usp=sharing)
 
