@@ -1,6 +1,5 @@
 ## Objetivo 1
-**Identificar zonas de alto y bajo consumo energético a nivel municipal, estatal y regional.**
-  
+ 
 Previo a realizar la primer consulta en donde se solicita el consumo energético por municipio. Se realizó una suma de los diferentes tipos de consumo. Esto porque la capa tiene el consumo por sector, que en este caso son seis: agrícola(agr), residencial(res), público(pub), comercial(com), industrial (ind) e industria mediana (mind)
 
 Previo a realizar la primera consulta, en la cual se solicita el consumo energético por municipio, se llevó a cabo una suma de los distintos tipos de aprovechamiento energético. Esta operación fue necesaria debido a que la capa original contiene el consumo desagregado por sector, los cuales son seis: agrícola (agr), residencial (res), público (pub), comercial (com), industrial (ind) e industria mediana (mind).
@@ -31,12 +30,10 @@ ORDER BY consumo_tot DESC
 LIMIT 25;
 ```
 <p align="center">
-  <img src="img/c1.png" alt="Mapa C1" width="600">
+  <img src="img/c1.png" alt="Mapa C1" width="300">
 </p>
 
-
-** a. ¿Cuál es la capacidad de generación por estado?**
-
+**a. ¿Cuál es la capacidad de generación por estado?**
 ``` sql
 CREATE TABLE resultados.prod_energia AS
 SELECT
@@ -56,7 +53,9 @@ ORDER BY
    prod_energia_edo DESC;
 ```
 
-
+<p align="center">
+  <img src="img/c1a.png" alt="Mapa C1" width="300">
+</p>
 
 
 
