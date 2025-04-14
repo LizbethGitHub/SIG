@@ -17,7 +17,7 @@ create extension postgis;
 create schema resultados;
 ```
 #### Añadir las capas y tablas en QGis
-A través del software QGis, se adjuntaron las tablas y capas necesarias 
+A través del software QGis, se adjuntaron las tablas y capas necesarias para rezalizar este proyecto
 
 
 #### Asignar sistema de coordenadas o proyección
