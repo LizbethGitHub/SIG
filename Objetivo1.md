@@ -30,7 +30,7 @@ ORDER BY consumo_tot DESC
 LIMIT 25;
 ```
 <p align="center">
-  <img src="img/c1.png" alt="Mapa C1" width="400">
+  <img src="img/c1.png" alt="Mapa C1" width="45%">
 </p>
 
 **a. ¿Cuál es la capacidad de generación por estado?**
@@ -54,8 +54,8 @@ ORDER BY
 ```
 
 <p align="center">
-  <img src="img/c1a.png" alt="c1a" width="20%" style="margin-right: 2%;">
-  <img src="img/c1a1.png" alt="c1a1" width="20%">
+  <img src="img/c1a.png" alt="c1a" width="30%" style="margin-right: 2%;">
+  <img src="img/c1a1.png" alt="c1a1" width="55%">
 </p>
 
 
