@@ -54,7 +54,7 @@ ORDER BY
 ```
 
 <p align="center">
-  <img src="img/c1a.png" alt="c1a" width="30%" style="margin-right: 2%;">
+  <img src="img/c1a.png" alt="c1a" width="30%" style="margin-right: 100%;">
   <img src="img/c1a1.png" alt="c1a1" width="55%">
 </p>
 
