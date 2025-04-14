@@ -30,10 +30,31 @@ FROM public.consumo_elect_sector_mun_2022
 ORDER BY consumo_tot DESC
 LIMIT 25;
 ```
-*Resultado consulta*
-![C1](img/c1.png)
+<p align="center">
+  <img src="img/c1.png" alt="Mapa C1" width="600">
+</p>
 
 
+** a. ¿Cuál es la capacidad de generación por estado?**
+
+``` sql
+CREATE TABLE resultados.prod_energia AS
+SELECT
+   e.cve_ent,
+   e.nomgeo AS nombre_entidad,
+   SUM(pe.gener_gwh) AS prod_energia_edo,
+   e.geom
+FROM
+   public.entidades e
+JOIN
+   public.plantas_generadoras_tecnologia pe
+ON
+   ST_Intersects(pe.geom, e.geom)
+GROUP BY
+   e.cve_ent, e.nomgeo, e.geom
+ORDER BY
+   prod_energia_edo DESC;
+```
 
 
 
@@ -43,10 +64,7 @@ LIMIT 25;
 
 
  
-2. **Creación de la base de datos**
-   Se creó una base de datos a la cual se añadieron las capas de trabajo.
-3. **Definición del esquema de resultados** 
-   Se creó un esquema destinado a almacenar los resultados de las consultas.
+
 
 ``` sql
 
