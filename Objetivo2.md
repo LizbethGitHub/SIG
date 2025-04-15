@@ -1,6 +1,6 @@
 ## Objetivo 2
  
-**Caracterizar los municipios con rezago energético en el consumo de energía del sector residencial a partir del porcentaje de viviendas sin luz eléctrica.** 
+#### Caracterizar los municipios con rezago energético en el consumo de energía del sector residencial a partir del porcentaje de viviendas sin luz eléctrica. 
 
 Previo a calcular los índices de ingreso per-cápita, se realizaron cambios a la columna de la población total de tipo string a numérico
 
@@ -9,14 +9,14 @@ ALTER TABLE public.poptot_2020
 ALTER COLUMN valor TYPE NUMERIC
 USING valor::NUMERIC;
 ```
-**a. Crear campo consumo percapita, cuartil, categoria percapita**
+#### 1. Crear campo consumo percapita, cuartil, categoria percapita**
    ``` sql
 alter table public.consumo_elect_sector_mun_2022 add column consumo_per_cap numeric;
 ALTER TABLE public.consumo_elect_sector_mun_2022 ADD COLUMN cuartil_percap INTEGER;
 ALTER TABLE consumo_elect_sector_mun_2022 ADD COLUMN cat_percap TEXT;
 ```
 
-**b. Actualizar campo consumo percapita**
+#### 2. Actualizar campo consumo percapita**
    ``` sql
 UPDATE public.consumo_elect_sector_mun_2022 AS ce
 SET consumo_per_cap = ce.res / pop.valor
@@ -24,7 +24,7 @@ FROM poptot_2020 AS pop
 WHERE ce.cvegeomun = pop.cvegeo;
 
 ```
-**c. Actualizar campo cuartil percapita**
+#### 3. Actualizar campo cuartil percapita**
 ``` sql
 WITH cuartiles AS (
  SELECT cvegeomun, NTILE(4) OVER (ORDER BY consumo_per_cap) AS cuartil
@@ -36,7 +36,7 @@ FROM cuartiles q
 WHERE c.cvegeomun = q.cvegeomun;
 ```
 
-**d. Actualizar campo categoria percapita**
+#### 4. Actualizar campo categoria percapita**
 ``` sql
 UPDATE public.consumo_elect_sector_mun_2022
 SET cat_percap = CASE
@@ -46,7 +46,7 @@ SET cat_percap = CASE
    ELSE NULL
 END;
 ```
-## 1. Municipios con alto consumo per capita y alto porcentaje de viviendas sin luz eléctrica (2%) 
+#### 5. Municipios con alto consumo per capita y alto porcentaje de viviendas sin luz eléctrica (2%) 
 **combinar registros donde el % de viviendas sin acceso a electrcidad sea mayor al 2% y el consumo per capita sea de categoria 'alto'**   
 ``` sql
 create table resultados.mun_desigualdad as
@@ -57,7 +57,7 @@ ON c.cvegeomun = a.cvegeo
 WHERE c.cat_percap = 'alto' AND a.v_sep_2020 > 2
 ORDER BY a.v_sep_2020 DESC;
 ```
-## 2. Porcentaje de viviendas sin acceso a la electricidad por localidad que pertenecen a municipios con alto consumo per çapita
+#### 6. Porcentaje de viviendas sin acceso a la electricidad por localidad que pertenecen a municipios con alto consumo per çapita
 ``` sql
 CREATE TABLE resultados.localidades_percapita AS
 SELECT
