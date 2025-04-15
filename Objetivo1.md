@@ -1,6 +1,6 @@
 ## Objetivo 1
- 
-Previo a realizar la primer consulta en donde se solicita el consumo energético por municipio. Se realizó una suma de los diferentes tipos de consumo. Esto porque la capa tiene el consumo por sector, que en este caso son seis: agrícola(agr), residencial(res), público(pub), comercial(com), industrial (ind) e industria mediana (mind)
+
+### Escribir objetivo
 
 Previo a realizar la primera consulta, en la cual se solicita el consumo energético por municipio, se llevó a cabo una suma de los distintos tipos de aprovechamiento energético. Esta operación fue necesaria debido a que la capa original contiene el consumo desagregado por sector, los cuales son seis: agrícola (agr), residencial (res), público (pub), comercial (com), industrial (ind) e industria mediana (mind).
 
@@ -20,7 +20,7 @@ SET
  ind  = COALESCE(ind, 0),
  mind = COALESCE(mind, 0);
 ```
-1. **¿Cuáles son los municipios que mayor energía eléctrica consumen a nivel nacional? El 1% de los municipios que más consumen**
+#### 1. ¿Cuáles son los municipios que mayor energía eléctrica consumen a nivel nacional? El 1% de los municipios que más consumen
    
 ``` sql
 CREATE TABLE resultados.consumo_region_resumen AS
@@ -33,7 +33,7 @@ LIMIT 25;
   <img src="img/c1.png" alt="Mapa C1" width="45%">
 </p>
 
-**a. ¿Cuál es la capacidad de generación por estado?**
+#### 2. ¿Cuál es la capacidad de generación por estado?
 ``` sql
 CREATE TABLE resultados.prod_energia AS
 SELECT
@@ -58,7 +58,7 @@ ORDER BY
   <img src="img/c1a1.png" alt="c1a1" width="55%">
 </p>
 
-**b. ¿Cuál es el estado que más consume energía?**
+#### 3. ¿Cuál es el estado que más consume energía?
 ``` sql
 WITH resumen AS (
  SELECT
@@ -85,7 +85,7 @@ SET
 FROM resumen AS r
 WHERE e.cve_ent = r.cve_ent;
 ```
-**b1. ¿Entidad con mayor consumo?**
+#### 4. ¿Entidad con mayor consumo?
 ``` sql
 CREATE TABLE resultados.prod_energia_sector AS
 SELECT nomgeo,
@@ -95,7 +95,7 @@ GROUP BY nomgeo
 ORDER BY cons_tot_ent DESC;
 ```
 
-**c. ¿Cuál es el consumo total por sector de cada región CENACE?**
+#### 4. ¿Cuál es el consumo total por sector de cada región CENACE?
 ``` sql
 CREATE TABLE resultados.consumo_region_resumen AS
 SELECT region_con,
@@ -110,7 +110,7 @@ FROM public.consumo_elect_sector_mun_2022
 GROUP BY region_con
 ORDER BY region_con;
 ```
-**d) Porcentaje  máximo por sector en cada región**
+#### 5. Porcentaje máximo por sector en cada región
 ``` sql
 CREATE TABLE resultados.porcentajes_sector_region AS
 SELECT
@@ -125,11 +125,11 @@ FROM public.consumo_elect_sector_mun_2022
 GROUP BY region_con
 ORDER BY region_con;
 ```
-**e. ¿Cuál es la región CENACE que tiene los municipios con mayor consumo de energía eléctrica?**
+#### 6. ¿Cuál es la región CENACE que tiene los municipios con mayor consumo de energía eléctrica?
 ``` sql
 
 ```
-**f. ¿Qué tipo de tecnología es la principal a nivel nacional?**
+#### 7. ¿Qué tipo de tecnología es la principal a nivel nacional?
 ``` sql
 SELECT tecno_simp, COUNT(*) AS total_plantas
    FROM public.plantas_generadoras_tecnologia
@@ -137,7 +137,7 @@ SELECT tecno_simp, COUNT(*) AS total_plantas
    ORDER BY COUNT(*) desc
 ```
 
-**g. crear tabla con el tipo de tecnología principal**
+#### 8. Crear tabla con el tipo de tecnología principal
 ``` sql
 create table resultados.plantas_tecnologia as
 SELECT *
@@ -149,7 +149,7 @@ WHERE tecno_simp = (
    ORDER BY COUNT(*) desc
    limit 1);
 ```
-**h. ¿Qué tipo de tecnología es la principal en la region CENACE de mayor consumo nacional?**
+#### 9. ¿Qué tipo de tecnología es la principal en la region CENACE de mayor consumo nacional?
 ``` sql
 SELECT tecno_simp, COUNT(*) AS total_plantas
 FROM public.plantas_generadoras_tecnologia
@@ -158,7 +158,7 @@ GROUP BY tecno_simp
 ORDER BY total_plantas DESC
 LIMIT 10;
 ```
-**i. ¿Cuantas son las centrales del sector público y privado a nivel nacional?**
+#### 10. ¿Cuántas son las centrales del sector público y privado a nivel nacional?
 ``` sql
 create table resultados.plantas_tecnologia_privado as
 select central , empresa , tecno_simp , region_con, geom
@@ -170,7 +170,7 @@ select central , empresa , tecno_simp , region_con, geom
 FROM public.plantas_generadoras_tecnologia
 where sector = 'Publico';
 ```
-**j. ¿Qué estado tiene mas plantas del sector privado?**
+#### 11. ¿Qué estado tiene mas plantas del sector privado?
 ``` sql
 SELECT cve_ent, entidad, matriz, COUNT(*) AS total_plantas_privadas
 FROM public.plantas_generadoras_tecnologia
@@ -180,7 +180,7 @@ ORDER BY total_plantas_privadas DESC
 LIMIT 10;
 ```
 
-**k. ¿obtener los 10 municipios de mayor consumo por cada region CENACE?**
+#### 12. ¿Obtener los 10 municipios de mayor consumo por cada region CENACE?
 ``` sql
 create table resultados.mun_cenace as
 WITH consumun_reg AS (
@@ -192,7 +192,7 @@ SELECT *
 FROM consumun_reg
 WHERE pos <= 10;
 ```
-**l. ¿Regiones CENACE con mas subestaciones?**
+#### 13. ¿Regiones CENACE con mas subestaciones?
 ``` sql
 SELECT rc.region_con,
   COALESCE(COUNT(DISTINCT se.id), 0) AS total_sub
@@ -204,7 +204,7 @@ ORDER BY total_sub desc
 limit 1;
 ```
 
-**m. ¿Regiones CENACE con mas centrales eléctricas?**
+#### 14. ¿Regiones CENACE con mas centrales eléctricas?
 ``` sql
 SELECT rc.region_con,
   COALESCE(COUNT(DISTINCT ce.id), 0) AS total_cent
