@@ -1,6 +1,6 @@
 ## Objetivo 1
 
-### Escribir objetivo
+### Identificar zonas de alto y bajo consumo energético a nivel municipal, estatal y regional.
 
 Previo a realizar la primera consulta, en la cual se solicita el consumo energético por municipio, se llevó a cabo una suma de los distintos tipos de aprovechamiento energético. Esta operación fue necesaria debido a que la capa original contiene el consumo desagregado por sector, los cuales son seis: agrícola (agr), residencial (res), público (pub), comercial (com), industrial (ind) e industria mediana (mind).
 
