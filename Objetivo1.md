@@ -58,15 +58,162 @@ ORDER BY
   <img src="img/c1a1.png" alt="c1a1" width="55%">
 </p>
 
+**b. ¿Cuál es el estado que más consume energía?**
+``` sql
+WITH resumen AS (
+ SELECT
+   cve_ent,
+   SUM(consumo_tot) AS consumo_tot_ent,
+   SUM(agr) AS agr_ent,
+   SUM(ind) AS ind_ent,
+   SUM(pub) AS pub_ent,
+   SUM(com) AS com_ent,
+   SUM(mind) AS mind_ent,
+   SUM(res) AS res_ent
+ FROM consumo_elect_sector_mun_2022
+ GROUP BY cve_ent
+)
+UPDATE entidades AS e
+SET
+ consumo_tot_ent = r.consumo_tot_ent,
+ agr_ent = r.agr_ent,
+ ind_ent = r.ind_ent,
+ pub_ent = r.pub_ent,
+ com_ent = r.com_ent,
+ res_ent = r.res_ent,
+ mind_ent = r.mind_ent
+FROM resumen AS r
+WHERE e.cve_ent = r.cve_ent;
+```
+**b1. ¿Entidad con mayor consumo?**
+``` sql
+CREATE TABLE resultados.prod_energia_sector AS
+SELECT nomgeo,
+      SUM(consumo_tot_ent) AS cons_tot_ent
+FROM public.entidades e
+GROUP BY nomgeo
+ORDER BY cons_tot_ent DESC;
+```
 
-
-
-
-
- 
-
-
+**c. ¿Cuál es el consumo total por sector de cada región CENACE?**
+``` sql
+CREATE TABLE resultados.consumo_region_resumen AS
+SELECT region_con,
+ SUM(agr) AS agricultura,
+ SUM(res) AS residencial,
+ SUM(pub) AS alu_publico,
+ SUM(com) AS comercio,
+ SUM(ind) AS gran_ind,
+ SUM(mind) AS med_ind,
+ SUM(agr + res + pub + com + ind + mind) AS consumo_total
+FROM public.consumo_elect_sector_mun_2022
+GROUP BY region_con
+ORDER BY region_con;
+```
+**d) Porcentaje  máximo por sector en cada región**
+``` sql
+CREATE TABLE resultados.porcentajes_sector_region AS
+SELECT
+region_con,
+ROUND(SUM(agr) * 100.0 / SUM(consumo_tot), 2) AS porc_agr,
+ROUND(SUM(res) * 100.0 / SUM(consumo_tot), 2) AS porc_res,
+ROUND(SUM(pub) * 100.0 / SUM(consumo_tot), 2) AS porc_pub,
+ROUND(SUM(com) * 100.0 / SUM(consumo_tot), 2) AS porc_com,
+ROUND(SUM(ind) * 100.0 / SUM(consumo_tot), 2) AS porc_ind,
+ROUND(SUM(mind) * 100.0 / SUM(consumo_tot), 2) AS porc_mind
+FROM public.consumo_elect_sector_mun_2022
+GROUP BY region_con
+ORDER BY region_con;
+```
+**e. ¿Cuál es la región CENACE que tiene los municipios con mayor consumo de energía eléctrica?**
 ``` sql
 
 ```
+**f. ¿Qué tipo de tecnología es la principal a nivel nacional?**
+``` sql
+SELECT tecno_simp, COUNT(*) AS total_plantas
+   FROM public.plantas_generadoras_tecnologia
+   GROUP BY tecno_simp
+   ORDER BY COUNT(*) desc
+```
+
+**g. crear tabla con el tipo de tecnología principal**
+``` sql
+create table resultados.plantas_tecnologia as
+SELECT *
+FROM public.plantas_generadoras_tecnologia
+WHERE tecno_simp = (
+   SELECT tecno_simp
+   FROM public.plantas_generadoras_tecnologia
+   GROUP BY tecno_simp
+   ORDER BY COUNT(*) desc
+   limit 1);
+```
+**h. ¿Qué tipo de tecnología es la principal en la region CENACE de mayor consumo nacional?**
+``` sql
+SELECT tecno_simp, COUNT(*) AS total_plantas
+FROM public.plantas_generadoras_tecnologia
+where region_con = 'NOROESTE'
+GROUP BY tecno_simp
+ORDER BY total_plantas DESC
+LIMIT 10;
+```
+**i. ¿Cuantas son las centrales del sector público y privado a nivel nacional?**
+``` sql
+create table resultados.plantas_tecnologia_privado as
+select central , empresa , tecno_simp , region_con, geom
+FROM public.plantas_generadoras_tecnologia
+where sector = 'Privado';
+
+create table resultados.plantas_tecnologia_publico as
+select central , empresa , tecno_simp , region_con, geom
+FROM public.plantas_generadoras_tecnologia
+where sector = 'Publico';
+```
+**j. ¿Qué estado tiene mas plantas del sector privado?**
+``` sql
+SELECT cve_ent, entidad, matriz, COUNT(*) AS total_plantas_privadas
+FROM public.plantas_generadoras_tecnologia
+WHERE sector = 'Publico'
+GROUP BY cve_ent, entidad, matriz
+ORDER BY total_plantas_privadas DESC
+LIMIT 10;
+```
+
+**k. ¿obtener los 10 municipios de mayor consumo por cada region CENACE?**
+``` sql
+create table resultados.mun_cenace as
+WITH consumun_reg AS (
+  SELECT *,
+         ROW_NUMBER() OVER (PARTITION BY region_con ORDER BY consumo_tot DESC) AS pos
+  FROM public.consumo_elect_sector_mun_2022
+)
+SELECT *
+FROM consumun_reg
+WHERE pos <= 10;
+```
+**l. ¿Regiones CENACE con mas subestaciones?**
+``` sql
+SELECT rc.region_con,
+  COALESCE(COUNT(DISTINCT se.id), 0) AS total_sub
+FROM public.regiones_cenace rc
+LEFT JOIN public.subestaciones se
+ON ST_Intersects(se.geom, rc.geom)
+GROUP BY rc.region_con
+ORDER BY total_sub desc
+limit 1;
+```
+
+**m. ¿Regiones CENACE con mas centrales eléctricas?**
+``` sql
+SELECT rc.region_con,
+  COALESCE(COUNT(DISTINCT ce.id), 0) AS total_cent
+FROM public.regiones_cenace rc
+LEFT JOIN public.cent_elec ce
+ON ST_Intersects(ce.geom, rc.geom)
+GROUP BY rc.region_con
+ORDER BY total_cent desc
+limit 1;
+```
+
 
