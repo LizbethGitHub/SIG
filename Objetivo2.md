@@ -1,6 +1,6 @@
 ## Objetivo 2
  
-#### Caracterizar los municipios con rezago energético en el consumo de energía del sector residencial a partir del porcentaje de viviendas sin luz eléctrica. 
+### Caracterizar los municipios con rezago energético en el consumo de energía del sector residencial a partir del porcentaje de viviendas sin luz eléctrica. 
 
 Previo a calcular los índices de ingreso per-cápita, se realizaron cambios a la columna de la población total de tipo string a numérico
 
