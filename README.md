@@ -1,9 +1,9 @@
 # Panorama del consumo y cobertura de energía eléctrica en México 
 **Lizbeth Camacho Olivares**
 
-**Ivan Jacob Celestino Olivares**
-
 **Karen Zoravir Miranda Huerta**
+
+**Ivan Jacob Celestino Olivares**
 
 #### Introducción
 <div align="justify">
