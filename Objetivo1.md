@@ -127,7 +127,16 @@ ORDER BY region_con;
 ```
 #### 6. ¿Cuál es la región CENACE que tiene los municipios con mayor consumo de energía eléctrica?
 ``` sql
-
+SELECT region_con, COUNT(*) AS municipios_top10
+FROM (
+   SELECT nom_mun, region_con, consumo_tot
+   FROM consumo_elect_sector_mun_2022
+   ORDER BY consumo_tot desc
+   limit 10
+) AS top10
+GROUP BY region_con
+ORDER BY municipios_top10 DESC
+LIMIT 10;
 ```
 #### 7. ¿Qué tipo de tecnología es la principal a nivel nacional?
 ``` sql
