@@ -57,13 +57,3 @@ ORDER BY region_con, prod_energia DESC;
 
 
 
-<p align="center">
-  <img src="img/c1.png" alt="Mapa C1" width="45%">
-</p>
-
-
-
-<p align="center">
-  <img src="img/c1a.png" alt="c1a" width="30%" style="margin-right: 100%;">
-  <img src="img/c1a1.png" alt="c1a1" width="55%">
-</p>
