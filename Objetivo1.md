@@ -29,9 +29,6 @@ FROM public.consumo_elect_sector_mun_2022
 ORDER BY consumo_tot DESC
 LIMIT 25;
 ```
-<p align="center">
-  <img src="img/c1.png" alt="Mapa C1" width="45%">
-</p>
 
 #### 2. ¿Cuál es la capacidad de generación por estado?
 ``` sql
@@ -52,11 +49,6 @@ GROUP BY
 ORDER BY
    prod_energia_edo DESC;
 ```
-
-<p align="center">
-  <img src="img/c1a.png" alt="c1a" width="30%" style="margin-right: 100%;">
-  <img src="img/c1a1.png" alt="c1a1" width="55%">
-</p>
 
 #### 3. ¿Cuál es el estado que más consume energía?
 ``` sql
