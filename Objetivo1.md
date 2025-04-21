@@ -20,7 +20,7 @@ SET
  ind  = COALESCE(ind, 0),
  mind = COALESCE(mind, 0);
 ```
-#### 1. ¿Cuáles son los municipios que mayor energía eléctrica consumen a nivel nacional? El 1% de los municipios que más consumen
+#### 1. ¿Cuáles son los municipios que tienen mayor consumo de energía eléctrica a nivel nacional?
    
 ``` sql
 CREATE TABLE resultados.consumo_region_resumen AS
@@ -28,6 +28,14 @@ SELECT nom_mun, agr, res, pub, com, ind, mind, region_con, consumo_tot, consumo_
 FROM public.consumo_elect_sector_mun_2022
 ORDER BY consumo_tot DESC
 LIMIT 25;
+
+<p align="center">
+  <img src="mapas/con.png" alt="Mapa C1" width="45%">
+</p>
+
+
+
+
 ```
 
 #### 2. ¿Cuál es la capacidad de generación por estado?
