@@ -184,6 +184,11 @@ select central , empresa , tecno_simp , region_con, geom
 FROM public.plantas_generadoras_tecnologia
 where sector = 'Publico';
 ```
+<p align="center">
+  <img src="mapas/Tipo de propiedad de plantas generadoras de energía eléctrica.jpg" alt="Mapa C1" width="70%">
+</p>
+
+
 #### 11. ¿Qué estado tiene mas plantas del sector privado?
 ``` sql
 SELECT cve_ent, entidad, matriz, COUNT(*) AS total_plantas_privadas
