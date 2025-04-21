@@ -193,7 +193,7 @@ SELECT *
 FROM consumun_reg
 WHERE pos <= 10;
 ```
-#### 13. ¿Regiones CENACE con mas subestaciones?
+#### 13. ¿Regiones CENACE con más subestaciones?
 ``` sql
 SELECT rc.region_con,
   COALESCE(COUNT(DISTINCT se.id), 0) AS total_sub
@@ -205,7 +205,7 @@ ORDER BY total_sub desc
 limit 1;
 ```
 
-#### 14. ¿Regiones CENACE con mas centrales eléctricas?
+#### 14. ¿Regiones CENACE con más centrales eléctricas?
 ``` sql
 SELECT rc.region_con,
   COALESCE(COUNT(DISTINCT ce.id), 0) AS total_cent
