@@ -28,6 +28,10 @@ GROUP BY e.cve_ent, e.nomgeo, e.geom
 ORDER BY prod_energia_edo DESC;
 ```
 
+<p align="center">
+  <img src="mapas/Generación de energía eléctrica renovable total en GWh del sistema eléctrico nacional por estado en 2022.jpg" alt="Mapa C1" width="70%">
+</p>
+
 #### 3. ¿Cuál es la capacidad de generación de energía eléctrica no renovable en GWh por estado?
 ``` sql
 CREATE TABLE resultados.prod_energia_no_renovable AS
@@ -43,6 +47,10 @@ WHERE pe.energet_pr NOT IN ('Sol', 'Viento', 'Bagazo de caña', 'Agua', 'Calor G
 GROUP BY e.cve_ent, e.nomgeo, e.geom
 ORDER BY prod_energia_edo DESC;
 ```
+<p align="center">
+  <img src="mapas/Generación de energía eléctrica no renovable total en GWh del sistema eléctrico nacional por estado en 2022.jpg" alt="Mapa C1" width="70%">
+</p>
+
 #### 4. ¿Cuál es la mayor fuente de energía renovable que se produce por región CENACE?
    ``` sql
 CREATE TABLE resultados.regio_energia_general AS
