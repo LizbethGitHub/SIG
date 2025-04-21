@@ -1,6 +1,6 @@
 ## Antes de empezar
 
-Los datos utilizados en este proyecto se pueden desgaragar de  siguiente enlace [link](https://drive.google.com/file/d/1vdl6zHGmNvYA9OYH43GkE1GEpkIwDQte/view?usp=drive_link)
+Los datos utilizados en este proyecto se pueden desgaragar de  siguiente enlace [link](https://drive.google.com/file/d/1vdl6zHGmNvYA9OYH43GkE1GEpkIwDQte/view?usp=sharing)
 
 #### Generar extensión postgis, base de datos, esquema 
 
