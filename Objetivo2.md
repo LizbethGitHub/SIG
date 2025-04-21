@@ -46,8 +46,7 @@ SET cat_percap = CASE
    ELSE NULL
 END;
 ```
-#### 5. Municipios con alto consumo per capita y alto porcentaje de viviendas sin luz eléctrica (2%) 
-**combinar registros donde el % de viviendas sin acceso a electrcidad sea mayor al 2% y el consumo per capita sea de categoria 'alto'**   
+#### 5. Municipios con alto consumo per capita y alto porcentaje de viviendas sin luz eléctrica (2%). Combinar registros donde el % de viviendas sin acceso a electrcidad sea mayor al 2% y el consumo per capita sea de categoria 'alto' 
 ``` sql
 create table resultados.mun_desigualdad as
 SELECT c.*, a.v_sep_2020
@@ -57,7 +56,11 @@ ON c.cvegeomun = a.cvegeo
 WHERE c.cat_percap = 'alto' AND a.v_sep_2020 > 2
 ORDER BY a.v_sep_2020 DESC;
 ```
-#### 6. Porcentaje de viviendas sin acceso a la electricidad por localidad que pertenecen a municipios con alto consumo per çapita
+<p align="center">
+  <img src="mapas/Municipios con rezago energético.jpg" alt="Mapa C1" width="70%">
+</p>
+
+#### 6. Porcentaje de viviendas sin acceso a la electricidad por localidad que pertenecen a municipios con alto consumo per cápita
 ``` sql
 CREATE TABLE resultados.localidades_percapita AS
 SELECT
@@ -71,19 +74,6 @@ WHERE m.cat_percap = 'alto'
  AND l.vph_s_elec > 0
 ORDER BY l.vph_s_elec DESC;
 ```
-
-
-
-
-
 <p align="center">
-  <img src="img/c1.png" alt="Mapa C1" width="45%">
+  <img src="mapas/Localidades con rezago energético.jpg" alt="Mapa C1" width="70%">
 </p>
-
-
-
-<p align="center">
-  <img src="img/c1a.png" alt="c1a" width="30%" style="margin-right: 100%;">
-  <img src="img/c1a1.png" alt="c1a1" width="55%">
-</p>
-
