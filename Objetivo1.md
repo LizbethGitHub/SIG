@@ -28,15 +28,11 @@ SELECT nom_mun, agr, res, pub, com, ind, mind, region_con, consumo_tot, consumo_
 FROM public.consumo_elect_sector_mun_2022
 ORDER BY consumo_tot DESC
 LIMIT 25;
-
+```
 <p align="center">
-  <img src="mapas/con.png" alt="Mapa C1" width="45%">
+  <img src="mapas/Municipios con mayor consumo de energia electrica en MWh 2022.jpg" alt="Mapa C1" width="70%">
 </p>
 
-
-
-
-```
 
 #### 2. ¿Cuál es la capacidad de generación por estado?
 ``` sql
@@ -85,6 +81,10 @@ SET
 FROM resumen AS r
 WHERE e.cve_ent = r.cve_ent;
 ```
+<p align="center">
+  <img src="mapas/Entidades con mayor consumo de energía eléctica en 2022.jpg" alt="Mapa C1" width="70%">
+</p>
+
 #### 4. ¿Entidad con mayor consumo?
 ``` sql
 CREATE TABLE resultados.prod_energia_sector AS
@@ -110,6 +110,11 @@ FROM public.consumo_elect_sector_mun_2022
 GROUP BY region_con
 ORDER BY region_con;
 ```
+
+<p align="center">
+  <img src="mapas/Regiones del Sistema Eléctrico Nacional con mayor consumo en 2022.jpg" alt="Mapa C1" width="70%">
+</p>
+
 #### 5. Porcentaje máximo por sector en cada región
 ``` sql
 CREATE TABLE resultados.porcentajes_sector_region AS
@@ -146,7 +151,7 @@ SELECT tecno_simp, COUNT(*) AS total_plantas
    ORDER BY COUNT(*) desc
 ```
 
-#### 8. Crear tabla con el tipo de tecnología principal
+#### 8. Tipo de tecnología principal
 ``` sql
 create table resultados.plantas_tecnologia as
 SELECT *
